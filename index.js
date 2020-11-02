@@ -10,23 +10,23 @@ colors = [
   '#009688',
   '#795548',
 ],
-randomIntegerFromInterval = (max) => {
-  return Math.floor(Math.random() * (max + 1));
-},
+
 setRandomColor = () => {
-  const _color = colors[randomIntegerFromInterval(colors.length - 1)]
+  const _color = colors[randomIntegerFromInterval(0, colors.length - 1)]
   console.log(_color)
   document.body.style.backgroundColor = _color;
 }
+const randomIntegerFromInterval = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
 
-let interval = undefined
-
-refs.startBtn.addEventListener('click', e => { interval =
+let intervalId = undefined;
+refs.startBtn.addEventListener('click', e => { intervalId =
 setInterval(() => setRandomColor(), 1000);
 refs.startBtn.setAttribute("disabled", true);
 })
 
 refs.stopBtn.addEventListener('click', e => {
-  clearInterval(interval);
+  clearInterval(intervalId);
   refs.startBtn.removeAttribute("disabled");
 })
